@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebResourceError;
@@ -15,7 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import com.kuma.news.databinding.ActivityNewsDetailsBinding;
-import com.kuma.news.model.NewsArticle;
+import com.kuma.news.model.Article;
 
 
 public class NewsDetailsActivity extends AppCompatActivity {
@@ -62,9 +62,9 @@ public class NewsDetailsActivity extends AppCompatActivity {
                 Toast.makeText(NewsDetailsActivity.this, "Error in loading webpage", Toast.LENGTH_SHORT).show();
             }
         });
-        final NewsArticle newsArticle = NewsStore.getNewsArticles().get(index);
-        mBinding.activityNewsDetailsWebview.loadUrl(newsArticle.getUrlToArticle());
-        getSupportActionBar().setTitle(newsArticle.getTitle());
+        final Article article = NewsStore.getArticles().get(index);
+        mBinding.activityNewsDetailsWebview.loadUrl(article.getUrl());
+        getSupportActionBar().setTitle(article.getTitle());
     }
 
     public static void launch(Context context, int index) {

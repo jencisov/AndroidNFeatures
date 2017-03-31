@@ -8,8 +8,8 @@
     <data>
 
         <variable
-            name="newsArticle"
-            type="com.kuma.news.model.NewsArticle"
+            name="article"
+            type="com.kuma.news.model.Article"
             />
     </data>
 
@@ -63,7 +63,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="18dp"
                     android:maxLines="1"
-                    android:text="@{newsArticle.title}"
+                    android:text="@{article.title}"
                     tools:text="News Title"
                     />
 
@@ -75,7 +75,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="4dp"
-                    android:text="@{newsArticle.time}"
+                    android:text="@{article.publishedAt}"
                     android:textColor="#808080"
                     tools:text="Today"
                     />
@@ -90,7 +90,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginTop="8dp"
                     android:maxLines="4"
-                    android:text="@{newsArticle.details}"
+                    android:text="@{article.description}"
                     android:textColor="#808080"
                     tools:text="This is a sample content This is a sample content This is a sample content"
                     />

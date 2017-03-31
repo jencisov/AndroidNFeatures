@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "167919707546",
+    "firebase_url": "https://kuma-news.firebaseio.com",
+    "project_id": "kuma-news",
+    "storage_bucket": "kuma-news.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:167919707546:android:31e8fa3b59d6ef08",
+        "android_client_info": {
+          "package_name": "com.kuma.news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "167919707546-prfocj1eo0sse2rk1c89ba5a3m36ik7n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kuma.news",
+            "certificate_hash": "d0c1e2030f32e76be04dd44b4b387c0ff609d362"
+          }
+        },
+        {
+          "client_id": "167919707546-dq0cm8aauv5l91itm46vq0prc31hehvr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiJtI18hmQ--GqRPjDD0o5GnCzRuTcA8c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "167919707546-dq0cm8aauv5l91itm46vq0prc31hehvr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

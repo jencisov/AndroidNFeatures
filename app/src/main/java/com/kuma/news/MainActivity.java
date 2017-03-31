@@ -1,34 +1,66 @@
 package com.kuma.news;
 
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.kuma.news.databinding.ActivityMainBinding;
-import com.kuma.news.model.NewsArticle;
+import com.kuma.news.model.Article;
+import com.kuma.news.model.GetArticlesResponse;
+import com.kuma.news.networking.NewsAPI;
+import com.kuma.news.utils.DateUtils;
 
-import java.util.ArrayList;
-import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
+    ActivityMainBinding binding;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityMainBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-
-        List<NewsArticle> newsArticles = new ArrayList<>();
-        newsArticles.add(new NewsArticle("Title", "Details",
-                "http://trome.pe/files/modulo_entero1x1/files/crop/uploads/2017/03/27/58d9b34bcc3f6.r_1490715466659.0-0-341-400.jpeg", "Today",
-                "http://trome.pe/deportes/seleccion-peruana/peru-vs-uruguay-vivo-directo-online-tv-eliminatorias-rusia-2018-44611"));
-        newsArticles.add(new NewsArticle("Title", "Details",
-                "http://trome.pe/files/modulo_entero2x1/uploads/2017/03/28/58dae729c1543.jpeg", "Today",
-                "http://trome.pe/deportes/futbol-internacional/chile-vs-venezuela-vivo-directo-online-tv-eliminatorias-rusia-2018-44602"));
-        NewsStore.setNewsArticles(newsArticles);
-
-        HomeNewsAdapter homeNewsAdapter = new HomeNewsAdapter(NewsStore.getNewsArticles());
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         binding.activityMainRecyclerview.setLayoutManager(new LinearLayoutManager(this));
+
+        NewsAPI.getApi().getArticles("espn", "top").enqueue(new Callback<GetArticlesResponse>() {
+            @Override public void onResponse(Call<GetArticlesResponse> call,
+                                             Response<GetArticlesResponse> response) {
+                handleResponse(response);
+                showNewApiSnack();
+            }
+
+            @Override public void onFailure(Call<GetArticlesResponse> call, Throwable t) {
+            }
+        });
+    }
+
+    private void handleResponse(Response<GetArticlesResponse> response) {
+        GetArticlesResponse getArticlesResponse = response.body();
+        NewsStore.setArticles(getArticlesResponse.getArticles());
+        HomeNewsAdapter homeNewsAdapter = new HomeNewsAdapter(NewsStore.getArticles());
         binding.activityMainRecyclerview.setAdapter(homeNewsAdapter);
+    }
+
+    private void parseDate(Article a) {
+        a.setPublishedAt(DateUtils.formatNewsApiDate(a.getPublishedAt()));
+    }
+
+    private void showNewApiSnack() {
+        Snackbar.make(binding.activityMain, "Powered by NewsApi.org", Snackbar.LENGTH_SHORT)
+                .setAction("Visit", new View.OnClickListener() {
+                    @Override public void onClick(View v) {
+                        loadNewsApiWebsite();
+                    }
+                }).show();
+    }
+
+    private void loadNewsApiWebsite() {
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://newsapi.org")));
     }
 
 }
