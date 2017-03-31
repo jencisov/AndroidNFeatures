@@ -2,7 +2,6 @@ package com.kuma.news;
 
 import android.databinding.ViewDataBinding;
 import android.os.Bundle;
-import android.support.v4.app.BundleCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,12 +27,12 @@ public class HomeNewsAdapter extends RecyclerView.Adapter<HomeNewsAdapter.HomeNe
 
     @Override public HomeNewsAdapter.HomeNewsViewHolder onCreateViewHolder(ViewGroup parent,
                                                                            int viewType) {
-        ItemHomeNewsBinding binding =
-                ItemHomeNewsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
+        ItemHomeNewsBinding binding = ItemHomeNewsBinding.inflate(
+                LayoutInflater.from(parent.getContext()), parent, false);
         return new HomeNewsViewHolder(binding);
     }
 
-    @Override public void onBindViewHolder(final HomeNewsAdapter.HomeNewsViewHolder holder, final int position) {
+    @Override public void onBindViewHolder(HomeNewsAdapter.HomeNewsViewHolder holder, int position) {
         final Article article = articleList.get(position);
         final View root = holder.getBinding().getRoot();
 
